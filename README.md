@@ -23,7 +23,6 @@ Wait for, acquire, and release a distributed lock via S3 storage.
     # timeout-poll: 5s
 
 - run: echo "Lock held, do work here"
-
 ```
 
 The lock is released in our Post step, or when it expires
