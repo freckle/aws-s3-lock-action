@@ -5,8 +5,10 @@ on:
   push:
     branches: main
 
-# TODO
-# concurrency:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 # permissions:
 
 jobs:
