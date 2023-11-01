@@ -4,21 +4,23 @@
   "description": "Action description",
   "main": "lib/main.js",
   "scripts": {
-    "build": "tsc && ncc build lib/acquire.js --out dist/acquire --minify && ncc build src/release.js --out dist/release --minify",
+    "build": "tsc && ncc build lib/acquire.js --out dist/acquire --minify && ncc build lib/release.js --out dist/release --minify",
     "format": "prettier --write \"**/*.ts\"",
     "format-check": "prettier --check \"**/*.ts\"",
     "test": "jest"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/freckle/TODO-action.git"
+    "url": "git+https://github.com/freckle/aws-s3-lock-action.git"
   },
   "author": "Freckle",
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.10.1",
     "@actions/exec": "^1.1.1",
-    "@actions/github": "^6.0.0"
+    "@actions/github": "^6.0.0",
+    "@aws-sdk/client-s3": "^3.440.0",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@actions/glob": "^0.4.0",
@@ -26,6 +28,7 @@
     "@octokit/types": "^12.1.1",
     "@types/jest": "^27.4.0",
     "@types/node": "^20.8.10",
+    "@types/uuid": "^9.0.6",
     "@vercel/ncc": "^0.38.1",
     "jest": "^27.4.7",
     "prettier": "^3.0.3",

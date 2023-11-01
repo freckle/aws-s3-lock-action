@@ -12,14 +12,15 @@ inputs:
     description: "Prefix for lock files within s3-bucket"
     required: false
     default: ""
-  lease:
+  expires:
     description: |
-      How long to aquire the lock for. Default is 5m.
+      How long to aquire the lock for. Default is 15m.
     required: true
-    default: 5m
+    default: 15m
   timeout:
     description: |
-      How long to wait for the lock to become available. Default matches lease.
+      How long to wait for the lock to become available. Default matches
+      expires.
     required: false
   timeout-poll:
     description: |

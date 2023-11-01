@@ -5,6 +5,10 @@ on:
   push:
     branches: main
 
+# TODO
+# concurrency:
+# permissions:
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,3 +21,51 @@ jobs:
       - run: yarn install
       - run: yarn build
       - run: yarn test --passWithNoTests
+
+  # integration:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: aws-actions/configure-aws-credentials@v4
+  #       with:
+  #         aws-region: ${{ vars.AWS_REGION }}
+  #         role-to-assume: ${{ secrets.AWS_ROLE }}
+
+  #     - id: lock-1
+  #       name: Acquire for 10s
+  #       uses: ./
+  #       with:
+  #         name: workflows-ci-integration
+  #         expires: 10s
+
+  #     - id: lock-2
+  #       name: Wait on lock-1 then aquire
+  #       uses: ./
+  #       with:
+  #         name: workflows-ci-integration
+  #         timeout: 15s
+  #         expires: 5s
+
+  #     - name: Verify locks
+  #       run: |
+  #         cat <<'EOM'
+  #         lock-1 acquired ${{ lock-1.outputs.aquired-at }}
+  #         lock-1 released ${{ lock-1.outputs.released-at }}
+  #         lock-2 acquired ${{ lock-2.outputs.aquired-at }}
+  #         lock-2 released ${{ lock-2.outputs.released-at }}
+  #         EOM
+
+  # integration-post:
+  #   needs: integration
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: aws-actions/configure-aws-credentials@v4
+  #       with:
+  #         aws-region: ${{ vars.AWS_REGION }}
+  #         role-to-assume: ${{ secrets.AWS_ROLE }}
+  #     - name: Assert lock was released
+  #       uses: ./
+  #       with:
+  #         name: workflows-ci-integration
+  #         timeout: 0s
