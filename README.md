@@ -1,19 +1,50 @@
-# TypeScript Action Template
+# AWS S3 Lock
 
-Our custom template repository for GitHub Actions implemented in TypeScript.
-
-[Creating a repository from a template][docs].
-
-[docs]: https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template
-
-**NOTE**: Be sure to look for strings like "TODO" or "Action name" and update
-them accordingly.
+Wait for, acquire, and release a distributed lock via S3 storage.
 
 ## Usage
 
 ```yaml
-- uses: freckle/TODO-action@v1
+- uses: aws-actions/configure-aws-credentials@v4
+  with:
+    # ...
+
+# This blocks until the lock is acquired, or errors if timeout is reached
+- uses: freckle/aws-s3-lock-action@v1
+  with:
+    # Required
+    name: some-name
+    s3-bucket: an-existing-s3-bucket
+
+    # Optional, defaults shown
+    # s3-prefix: ""
+    # expires: 15m
+    # timeout: {matches expires}
+    # timeout-poll: 5s
+
+- run: echo "Lock held, do work here"
+
 ```
+
+The lock is released in our Post step, or when it expires
+
+## Implementation & Caveats
+
+This tool implements the locking algorithm described in this [StackOverflow
+answer][answer], wrapped up with convenient actions ergonomics.
+
+Paraphrasing the described algorithm:
+
+- Put a lock object to S3 at `<prefix>/<name>.<uuid>`
+- List all objects with prefix `<prefix>/<name>.`
+- If the oldest object is ours, we've acquired the lock
+- If not, we lost the race; remove our object (and try again)
+
+[answer]: https://stackoverflow.com/questions/45222819/can-pseudo-lock-objects-be-used-in-the-amazon-s3-api/75347123#75347123
+
+**This tool is not meant to be bullet-proof**. We built it for our needs and
+accept that there are simply no strong guarantees in this locking mechanisms
+operation at scale.
 
 ## Inputs and Outputs
 
