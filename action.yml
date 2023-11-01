@@ -2,37 +2,36 @@ name: aws-s3-lock
 description: Wait on, acquire, and clean-up S3-based locks
 author: "Freckle"
 inputs:
-  name:
-    description: "Name for the lock"
-    required: true
-  s3-bucket:
-    description: "Name of existing S3 bucket to use. If empty, one will be created."
-    required: true
-  s3-prefix:
-    description: "Prefix for lock files within s3-bucket"
-    required: false
-    default: ""
-  lease:
+  bucket:
     description: |
-      How long to aquire the lock for. Default is 5m.
+      Name of an existing S3 bucket to use.
     required: true
-    default: 5m
+  name:
+    description: |
+      Name for the lock object. Include any prefix you want within the bucket.
+      The key will be built as "name.created.uuid.expires".
+    required: true
+    default: "${{ github.workflow }}/${{ github.job }}"
+  expires:
+    description: |
+      How long before concurrent operations consider this lock expired.
+    required: true
+    default: 15m
   timeout:
     description: |
-      How long to wait for the lock to become available. Default matches lease.
+      How long to wait for the lock to become available. Default matches
+      expires.
     required: false
   timeout-poll:
     description: |
-      How long to wait between checks for the lock. Default is 5s.
+      How long to wait between attempts for the lock. Default is 5s.
     required: true
     default: 5s
-
 outputs:
+  key:
+    description: "Key of the S3 object representing the lock"
   acquired-at:
-    description: "Timestamp of acquisition, or null"
-  released-at:
-    description: "Timestamp of release, or null"
-
+    description: "Timestamp the lock was acquired"
 runs:
   using: "node20"
   main: "dist/acquire/index.js"
