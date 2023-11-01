@@ -5,6 +5,13 @@ on:
   push:
     branches: main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  S3_BUCKET: aws-s3-lock-ci
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,3 +24,53 @@ jobs:
       - run: yarn install
       - run: yarn build
       - run: yarn test --passWithNoTests
+
+  integration:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ vars.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_ROLE }}
+
+      - id: lock-1
+        name: Acquire a lock
+        uses: ./
+        with:
+          bucket: ${{ env.S3_BUCKET }}
+          expires: 5s
+
+      - id: lock-2
+        name: Wait on previous lock then acquire our own
+        uses: ./
+        with:
+          bucket: ${{ env.S3_BUCKET }}
+          timeout: 10s
+
+      - name: Verify locks
+        run: |
+          [[ -n '${{ steps.lock-1.outputs.acquired-at }}' ]] # lock-1
+          [[ -n '${{ steps.lock-2.outputs.acquired-at }}' ]] # lock-2
+          # lock-2 acquired at should be +5s
+
+  integration-post:
+    needs: integration
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ vars.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_ROLE }}
+      - name: Assert lock was released
+        uses: ./
+        with:
+          bucket: ${{ env.S3_BUCKET }}
+          timeout: 0s
