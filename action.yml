@@ -27,6 +27,12 @@ inputs:
       How long to wait between attempts for the lock. Default is 5s.
     required: true
     default: 5s
+  context:
+    description:
+      Additional context to write as the body of the lock file. Concurrent
+      operations waiting on this lock will display it.
+    required: true
+    default: "${{ github.workflow }} #${{ github.run_number }}"
 outputs:
   key:
     description: "Key of the S3 object representing the lock"

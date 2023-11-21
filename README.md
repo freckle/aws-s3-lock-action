@@ -20,6 +20,7 @@ Wait for, acquire, and release a distributed lock via S3 storage.
     # expires: 15m
     # timeout: {matches expires}
     # timeout-poll: 5s
+    # context: "{workflow} #{run}"
 
 - run: echo "Lock held, do work here"
 ```

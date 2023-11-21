@@ -4,6 +4,7 @@ import {
   S3Client,
   ListObjectsV2Command,
   DeleteObjectCommand,
+  GetObjectCommand,
 } from "@aws-sdk/client-s3";
 import { Upload } from "@aws-sdk/lib-storage";
 
@@ -29,13 +30,13 @@ export class S3Lock {
     this.s3 = new S3Client();
   }
 
-  async acquireLock(): Promise<AcquireLockResult> {
+  async acquireLock(body: string): Promise<AcquireLockResult> {
     const key = createObjectKey(this.prefix, this.expires);
 
     core.debug(`[s3] Upload ${key}`);
     const upload = new Upload({
       client: this.s3,
-      params: { Bucket: this.bucket, Key: key, Body: "" },
+      params: { Bucket: this.bucket, Key: key, Body: body },
     });
     await upload.done();
 
@@ -70,17 +71,36 @@ export class S3Lock {
     return { tag: "not-acquired", blockingKey: keys[0] };
   }
 
-  objectKeyDetails(key: string): string {
+  async objectKeyDetails(key: string): Promise<string> {
     const end = key.slice(this.prefix.length);
     const { uuid, createdAt, expiresAt } = S3LockExt.fromString(end);
     const created = Duration.since(createdAt);
     const expires = Duration.until(expiresAt);
 
-    return [
+    let context;
+
+    try {
+      const obj = await this.s3.send(
+        new GetObjectCommand({
+          Bucket: this.bucket,
+          Key: key,
+        }),
+      );
+      context = await obj.Body?.transformToString();
+    } catch (ex) {
+      core.warning(`Unable to read object body ${ex}`);
+    }
+
+    const contextLines =
+      context && context === "" ? [] : [`Context: ${color.gray(context)}`];
+
+    const messageLines = [
       `${uuid}`,
       `Created: ${color.gray(createdAt)} (${color.cyan(created)} ago)`,
       `Expires: ${color.gray(expiresAt)} (${color.cyan(expires)} from now)`,
-    ].join("\n  ");
+    ].concat(contextLines);
+
+    return messageLines.join("\n  ");
   }
 
   static async releaseLock(bucket: string, key: string): Promise<void> {
