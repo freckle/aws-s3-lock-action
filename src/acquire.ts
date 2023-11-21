@@ -7,17 +7,18 @@ import * as color from "./color";
 
 async function run() {
   try {
-    const { name, bucket, expires, timeout, timeoutPoll } = getInputs();
+    const { name, bucket, expires, timeout, timeoutPoll, context } =
+      getInputs();
 
     const timer = new Timer(timeout);
     const s3Lock = new S3Lock(bucket, name, expires);
 
     while (true) {
-      let result = await s3Lock.acquireLock();
+      let result = await s3Lock.acquireLock(context);
 
       if (result.tag === "acquired") {
         const key = result.acquiredKey;
-        const keyDetails = s3Lock.objectKeyDetails(key);
+        const keyDetails = await s3Lock.objectKeyDetails(key);
         core.info(
           `Lock ${color.bold(name)} ${color.green(
             "acquired",
@@ -30,7 +31,7 @@ async function run() {
       }
 
       const key = result.blockingKey;
-      const keyDetails = s3Lock.objectKeyDetails(key);
+      const keyDetails = await s3Lock.objectKeyDetails(key);
 
       if (timer.expired()) {
         core.error(

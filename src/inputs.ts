@@ -8,6 +8,7 @@ export type Inputs = {
   expires: Duration;
   timeout: Duration;
   timeoutPoll: Duration;
+  context: string;
 };
 
 export function getInputs(): Inputs {
@@ -19,10 +20,11 @@ export function getInputs(): Inputs {
   const rawExpires = core.getInput("expires", { required: true });
   const rawTimeout = core.getInput("timeout", { required: false });
   const rawTimeoutPoll = core.getInput("timeout-poll", { required: true });
+  const context = core.getInput("context", { required: false });
 
   const expires = Duration.parse(rawExpires);
   const timeout = rawTimeout === "" ? expires : Duration.parse(rawTimeout);
   const timeoutPoll = Duration.parse(rawTimeoutPoll);
 
-  return { name, bucket, expires, timeout, timeoutPoll };
+  return { name, bucket, expires, timeout, timeoutPoll, context };
 }
