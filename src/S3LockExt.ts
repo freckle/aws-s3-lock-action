@@ -6,8 +6,12 @@ export interface Object {
   Key?: string;
 }
 
-export function createObjectKey(prefix: string, expires: Duration): string {
-  const ext = new S3LockExt(expires);
+export function createObjectKey(
+  prefix: string,
+  createdAt: Date,
+  expires: Duration,
+): string {
+  const ext = new S3LockExt(createdAt, expires);
   return `${prefix}${ext}`;
 }
 
@@ -28,8 +32,8 @@ export class S3LockExt {
   createdAt: Date;
   expiresAt: Date;
 
-  constructor(expires?: Duration) {
-    this.createdAt = new Date();
+  constructor(createdAt: Date, expires?: Duration) {
+    this.createdAt = createdAt;
     this.expiresAt = expires ? expires.after(this.createdAt) : new Date();
     this.uuid = uuidv4();
   }
@@ -60,10 +64,9 @@ export class S3LockExt {
       return new Date(parseInt(parts[idx], 10));
     };
 
-    const obj = new this();
+    const obj = new this(getDatePart(0));
 
     obj.uuid = parts[1];
-    obj.createdAt = getDatePart(0);
     obj.expiresAt = getDatePart(2);
 
     return obj;

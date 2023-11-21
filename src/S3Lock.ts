@@ -20,18 +20,20 @@ export type AcquireLockResult =
 export class S3Lock {
   private bucket: string;
   private prefix: string;
+  private createdAt: Date;
   private expires: Duration;
   private s3: S3ClientType;
 
   constructor(bucket: string, name: string, expires: Duration) {
     this.bucket = bucket;
     this.prefix = `${name}.`;
+    this.createdAt = new Date();
     this.expires = expires;
     this.s3 = new S3Client();
   }
 
   async acquireLock(body: string): Promise<AcquireLockResult> {
-    const key = createObjectKey(this.prefix, this.expires);
+    const key = createObjectKey(this.prefix, this.createdAt, this.expires);
 
     core.debug(`[s3] Upload ${key}`);
     const upload = new Upload({
