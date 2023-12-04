@@ -26,6 +26,7 @@ jobs:
       - run: yarn test --passWithNoTests
 
   integration:
+    if: ${{ github.actor != 'dependabot[bot]' }}
     runs-on: ubuntu-latest
     permissions:
       id-token: write
