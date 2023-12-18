@@ -30,7 +30,7 @@
     "@octokit/types": "^12.4.0",
     "@types/ansi-styles": "^4.2.0",
     "@types/jest": "^27.4.0",
-    "@types/node": "^20.10.4",
+    "@types/node": "^20.10.5",
     "@types/uuid": "^9.0.7",
     "@vercel/ncc": "^0.38.1",
     "jest": "^27.4.7",
