@@ -7,7 +7,8 @@
     "build": "tsc && ncc build lib/acquire.js --out dist/acquire --minify && ncc build lib/release.js --out dist/release --minify",
     "format": "prettier --write \"**/*.ts\"",
     "format-check": "prettier --check \"**/*.ts\"",
-    "test": "jest"
+    "test": "jest",
+    "readme": "npx action-docs -u && prettier --write README.md"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,7 @@
     "@types/node": "^20.12.13",
     "@types/uuid": "^9.0.8",
     "@vercel/ncc": "^0.38.1",
+    "action-docs": "^2.4.0",
     "jest": "^27.4.7",
     "prettier": "^3.2.5",
     "ts-jest": "^27.1.3",
