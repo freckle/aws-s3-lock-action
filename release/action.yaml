@@ -1,0 +1,17 @@
+name: aws-s3-lock-release
+description: Release and clean-up S3-based locks
+author: "Freckle"
+inputs:
+  bucket:
+    description: |
+      Name of an existing S3 bucket to use.
+    required: true
+  key:
+    description: |
+      Key returned as output from aws-s3-lock-acquire
+    required: true
+
+outputs: {}
+runs:
+  using: "node20"
+  main: "../dist/release/index.js"
