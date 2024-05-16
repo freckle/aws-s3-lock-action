@@ -1,14 +1,20 @@
 import * as core from "@actions/core";
 
 import { S3Lock } from "./S3Lock";
-import { getInputs } from "./inputs";
 
 async function run() {
   try {
-    const key = core.getState("key");
+    const bucket = core.getInput("bucket", { required: true });
+
+    // If we're being called as post
+    let key = core.getState("key");
+
+    if (key === "") {
+      // If we're being called directly
+      key = core.getInput("key");
+    }
 
     if (key !== "") {
-      const { bucket } = getInputs();
       core.info(`Releasing lock at s3://${bucket}/${key}`);
       await S3Lock.releaseLock(bucket, key);
     }
