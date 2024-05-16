@@ -32,6 +32,63 @@ pretty robust guarantee of release. Expired locks are ignored (not deleted), so
 it's recommended you put a Lifecyle policy on the Bucket to clean them up after
 some time.
 
+## Usage (Multi-Job)
+
+```yaml
+jobs:
+  acquire-lock:
+    # ...
+
+    steps:
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          # ...
+
+      # This blocks until the lock is acquired, or errors if timeout is reached
+      - id: lock
+        uses: freckle/aws-s3-lock-action/acquire@v1
+        with:
+          # Required
+          bucket: an-existing-s3-bucket
+
+          # Optional, defaults shown
+          # name: {workflow}/{job}
+          # expires: 15m
+          # timeout: {matches expires}
+          # timeout-poll: 5s
+          # context: "{workflow} #{run}"
+    outputs:
+      key: ${{ steps.lock.outputs.key }}
+
+  work:
+    # ...
+
+    needs:
+      - acquire-lock
+
+    steps:
+      - run: echo "Lock held, do work here"
+
+  release:
+    # ...
+
+    if: ${{ always() }}
+
+    needs:
+      - acquire-lock
+      - work
+
+    steps:
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          # ...
+
+      - uses: freckle/aws-s3-lock-action/release@v1
+        with:
+          bucket: an-existing-s3-bucket
+          key: ${{ needs.acquire-lock.outputs.key }}
+```
+
 <!-- action-docs-inputs action="action.yml" -->
 
 ## Inputs
