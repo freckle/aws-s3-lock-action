@@ -32,9 +32,31 @@ pretty robust guarantee of release. Expired locks are ignored (not deleted), so
 it's recommended you put a Lifecyle policy on the Bucket to clean them up after
 some time.
 
-## Inputs and Outputs
+<!-- action-docs-inputs action="action.yml" -->
 
-See [action.yml](./action.yml) for a complete list of inputs and outputs.
+## Inputs
+
+| name           | description                                                                                                                           | required | default                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------- |
+| `bucket`       | <p>Name of an existing S3 bucket to use.</p>                                                                                          | `true`   | `""`                                               |
+| `name`         | <p>Name for the lock object. Include any prefix you want within the bucket. The key will be built as "name.created.uuid.expires".</p> | `true`   | `${{ github.workflow }}/${{ github.job }}`         |
+| `expires`      | <p>How long before concurrent operations consider this lock expired.</p>                                                              | `true`   | `15m`                                              |
+| `timeout`      | <p>How long to wait for the lock to become available. Default matches expires.</p>                                                    | `false`  | `""`                                               |
+| `timeout-poll` | <p>How long to wait between attempts for the lock. Default is 5s.</p>                                                                 | `true`   | `5s`                                               |
+| `context`      | <p>Additional context to write as the body of the lock file. Concurrent operations waiting on this lock will display it.</p>          | `true`   | `${{ github.workflow }} #${{ github.run_number }}` |
+
+<!-- action-docs-inputs action="action.yml" -->
+
+<!-- action-docs-outputs action="action.yml" -->
+
+## Outputs
+
+| name          | description                                       |
+| ------------- | ------------------------------------------------- |
+| `key`         | <p>Key of the S3 object representing the lock</p> |
+| `acquired-at` | <p>Timestamp the lock was acquired</p>            |
+
+<!-- action-docs-outputs action="action.yml" -->
 
 ## Implementation Details
 
