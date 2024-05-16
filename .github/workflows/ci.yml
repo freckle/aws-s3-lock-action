@@ -75,3 +75,50 @@ jobs:
         with:
           bucket: ${{ env.S3_BUCKET }}
           timeout: 0s
+
+  integration-separate:
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ vars.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_ROLE }}
+
+      - id: lock-1
+        name: Acquire a lock
+        uses: ./acquire
+        with:
+          bucket: ${{ env.S3_BUCKET }}
+          expires: 5s
+
+      - id: lock-2
+        name: Wait on previous lock then acquire our own
+        uses: ./acquire
+        with:
+          bucket: ${{ env.S3_BUCKET }}
+          timeout: 10s
+
+      - name: Verify locks
+        run: |
+          [[ -n '${{ steps.lock-1.outputs.acquired-at }}' ]] # lock-1
+          [[ -n '${{ steps.lock-2.outputs.acquired-at }}' ]] # lock-2
+          # lock-2 acquired at should be +5s
+
+      - if: ${{ always() }}
+        name: Release lock-1
+        uses: ./release
+        with:
+          bucket: ${{ env.S3_BUCKET }}
+          key: ${{ steps.lock-1.outputs.key }}
+
+      - if: ${{ always() }}
+        name: Release lock-2
+        uses: ./release
+        with:
+          bucket: ${{ env.S3_BUCKET }}
+          key: ${{ steps.lock-2.outputs.key }}
