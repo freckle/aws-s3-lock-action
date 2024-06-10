@@ -23,7 +23,7 @@
     "@aws-sdk/client-s3": "^3.592.0",
     "@aws-sdk/lib-storage": "^3.591.0",
     "ansi-styles": "^6.2.1",
-    "uuid": "^9.0.1"
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@actions/glob": "^0.4.0",
