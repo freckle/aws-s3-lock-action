@@ -432,14 +432,14 @@
     "@smithy/types" "^3.5.0"
     tslib "^2.6.2"
 
-"@aws-sdk/lib-storage@^3.665.0":
-  version "3.665.0"
-  resolved "https://registry.yarnpkg.com/@aws-sdk/lib-storage/-/lib-storage-3.665.0.tgz#d320569e0053e6af54fec88b17bbde3e2bc34d28"
-  integrity sha512-HlxJi5rKyqaAWkhnFswgiB+Mnj/aaFZtoRLw4UU5Eg6/AXTdsM91f9PX5z3qD3qV+ZNBrh3nAkwcPS+gvSyF5w==
+"@aws-sdk/lib-storage@^3.667.0":
+  version "3.667.0"
+  resolved "https://registry.yarnpkg.com/@aws-sdk/lib-storage/-/lib-storage-3.667.0.tgz#5e28a47373076a8c53dbd336fec433b42766a410"
+  integrity sha512-92zA66bRfmnt0cvXkwNXoXS6k/5H816D5+9wtugVwWMdFFcfN0tgSORkihiumVjxZERVnpEmuHNVfU4UYmbdQw==
   dependencies:
     "@smithy/abort-controller" "^3.1.5"
     "@smithy/middleware-endpoint" "^3.1.4"
-    "@smithy/smithy-client" "^3.3.6"
+    "@smithy/smithy-client" "^3.4.0"
     buffer "5.6.0"
     events "3.3.0"
     stream-browserify "3.0.0"
@@ -1659,7 +1659,7 @@
     "@smithy/util-utf8" "^3.0.0"
     tslib "^2.6.2"
 
-"@smithy/smithy-client@^3.3.6", "@smithy/smithy-client@^3.4.0":
+"@smithy/smithy-client@^3.4.0":
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/@smithy/smithy-client/-/smithy-client-3.4.0.tgz#ceffb92108a4ad60cbede3baf44ed224dc70b333"
   integrity sha512-nOfJ1nVQsxiP6srKt43r2My0Gp5PLWCW2ASqUioxIiGmu6d32v4Nekidiv5qOmmtzIrmaD+ADX5SKHUuhReeBQ==
