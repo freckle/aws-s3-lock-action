@@ -1841,10 +1841,10 @@
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-1.1.2.tgz#ccb91445360179a04e7fe6aff78c00ffc1eeaf82"
   integrity sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw==
 
-"@types/ansi-styles@^4.2.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@types/ansi-styles/-/ansi-styles-4.2.0.tgz#2cd4a1224228906ba109538818db1655ab81e15d"
-  integrity sha512-GOFgxL1bG0rsuUTqBYzETHLV3kiYK/dVFeMxl/NjsM2NBe2kE+oHOL16aLHrZ32oCvzh0Iyop6TNcKaLnlMuRw==
+"@types/ansi-styles@^4.2.4":
+  version "4.2.4"
+  resolved "https://registry.yarnpkg.com/@types/ansi-styles/-/ansi-styles-4.2.4.tgz#0b1d78193b51176f62d777df178f2f589e1232c3"
+  integrity sha512-O2wIMU6jrkqapp/4WVW9GDEspyWzyoeQUaqHRiDfv6qcND1elN1sQbrhcBlKtVueVZDl+6HO9nnsMoAIojQfaw==
   dependencies:
     ansi-styles "*"
 
