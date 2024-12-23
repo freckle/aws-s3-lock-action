@@ -432,14 +432,14 @@
     "@smithy/types" "^3.7.2"
     tslib "^2.6.2"
 
-"@aws-sdk/lib-storage@^3.715.0":
-  version "3.715.0"
-  resolved "https://registry.yarnpkg.com/@aws-sdk/lib-storage/-/lib-storage-3.715.0.tgz#b8a78578f79d9a6a91289ac06d1e8ba9a95f9233"
-  integrity sha512-G7ixFBalI6ZAjhGnoRijj1gOJU/ZAMhkL+MJuSA0uLEmqY25Nxf9s7q+p6ORJHz39atJS3iRYjLtsWj0o+ybNw==
+"@aws-sdk/lib-storage@^3.717.0":
+  version "3.717.0"
+  resolved "https://registry.yarnpkg.com/@aws-sdk/lib-storage/-/lib-storage-3.717.0.tgz#338c1a3b02ca3c93819c080d86f5da97fb2175f5"
+  integrity sha512-3Wpsi5soTH2XCEEu9qctj6zVH4ViZ3Qe3crFL7fJQrE9Uw3X60/+IfYfJMgZdQY3pIqmUsjydR93PZG0x6cXLw==
   dependencies:
     "@smithy/abort-controller" "^3.1.9"
-    "@smithy/middleware-endpoint" "^3.2.5"
-    "@smithy/smithy-client" "^3.5.0"
+    "@smithy/middleware-endpoint" "^3.2.6"
+    "@smithy/smithy-client" "^3.5.1"
     buffer "5.6.0"
     events "3.3.0"
     stream-browserify "3.0.0"
@@ -1532,7 +1532,7 @@
     "@smithy/types" "^3.7.2"
     tslib "^2.6.2"
 
-"@smithy/middleware-endpoint@^3.2.5", "@smithy/middleware-endpoint@^3.2.6":
+"@smithy/middleware-endpoint@^3.2.6":
   version "3.2.6"
   resolved "https://registry.yarnpkg.com/@smithy/middleware-endpoint/-/middleware-endpoint-3.2.6.tgz#f2af3a1563eac2903ad0b4a6852b9703f2aa6088"
   integrity sha512-WAqzyulvvSKrT5c6VrQelgNVNNO7BlTQW9Z+s9tcG6G5CaBS1YBpPtT3VuhXLQbewSiGi7oXQROwpw26EG9PLQ==
@@ -1660,7 +1660,7 @@
     "@smithy/util-utf8" "^3.0.0"
     tslib "^2.6.2"
 
-"@smithy/smithy-client@^3.5.0", "@smithy/smithy-client@^3.5.1":
+"@smithy/smithy-client@^3.5.1":
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/@smithy/smithy-client/-/smithy-client-3.5.1.tgz#bb9f40a66f07106748c4a82e86fadc58b6b98ff9"
   integrity sha512-PmjskH4Os1Eh3rd5vSsa5uVelZ4DRu+N5CBEgb9AT96hQSJGWSEb6pGxKV/PtKQSIp9ft3+KvnT8ViMKaguzgA==
