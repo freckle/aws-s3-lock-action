@@ -32,6 +32,7 @@ async function run() {
 
       const key = result.blockingKey;
       const keyDetails = await s3Lock.objectKeyDetails(key);
+      const waitDuration = await s3Lock.waitDuration(key);
 
       if (timer.expired()) {
         core.error(
@@ -47,9 +48,9 @@ async function run() {
           "already held",
         )} by ${keyDetails}`,
       );
-      core.info(`Waiting ${timeoutPoll}`);
+      core.info(`Waiting until lock expires (${waitDuration} from now)`);
 
-      await timer.sleep(timeoutPoll);
+      await timer.sleep(waitDuration);
     }
   } catch (error) {
     if (error instanceof Error) {

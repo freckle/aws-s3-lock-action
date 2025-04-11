@@ -68,4 +68,9 @@ export class S3LockExt {
 
     return obj;
   }
+
+  static fromKey(prefix: string, key: string): S3LockExt {
+    const end = key.slice(prefix.length);
+    return this.fromString(end);
+  }
 }

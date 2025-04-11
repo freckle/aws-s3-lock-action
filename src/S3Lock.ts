@@ -114,4 +114,10 @@ export class S3Lock {
       }),
     );
   }
+
+  async waitDuration(key: string): Promise<Duration> {
+    const end = key.slice(this.prefix.length);
+    const { expiresAt } = S3LockExt.fromString(end);
+    return Duration.until(expiresAt);
+  }
 }
