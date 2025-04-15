@@ -114,4 +114,9 @@ export class S3Lock {
       }),
     );
   }
+
+  durationTillExpiry(key: string): Duration {
+    const { expiresAt } = S3LockExt.fromKey(this.prefix, key);
+    return Duration.until(expiresAt);
+  }
 }

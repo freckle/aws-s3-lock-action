@@ -67,4 +67,46 @@ describe("S3LockExt", () => {
 
     expect(exts.sort()).toEqual([ext1, ext2, ext3, ext4]);
   });
+
+  describe("fromKey", () => {
+    test("extracts extension from a key with prefix", () => {
+      const createdAt = new Date("2023-01-01T12:00:00Z");
+      const expiresAt = new Date("2023-01-01T13:00:00Z");
+      const uuid = "test-uuid";
+      
+      const ext = new S3LockExt();
+      ext.createdAt = createdAt;
+      ext.expiresAt = expiresAt;
+      ext.uuid = uuid;
+      
+      const prefix = "test/prefix/";
+      const key = `${prefix}${ext.toString()}`;
+      
+      const result = S3LockExt.fromKey(prefix, key);
+      
+      expect(result.uuid).toEqual(uuid);
+      expect(result.createdAt.getTime()).toEqual(createdAt.getTime());
+      expect(result.expiresAt.getTime()).toEqual(expiresAt.getTime());
+    });
+    
+    test("handles keys with different prefixes", () => {
+      const createdAt = new Date("2023-01-01T12:00:00Z");
+      const expiresAt = new Date("2023-01-01T13:00:00Z");
+      const uuid = "test-uuid";
+      
+      const ext = new S3LockExt();
+      ext.createdAt = createdAt;
+      ext.expiresAt = expiresAt;
+      ext.uuid = uuid;
+      
+      const prefix = "custom/prefix/";
+      const key = `${prefix}${ext.toString()}`;
+      
+      const result = S3LockExt.fromKey(prefix, key);
+      
+      expect(result.uuid).toEqual(uuid);
+      expect(result.createdAt.getTime()).toEqual(createdAt.getTime());
+      expect(result.expiresAt.getTime()).toEqual(expiresAt.getTime());
+    });
+  });
 });

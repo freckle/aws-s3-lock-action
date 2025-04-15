@@ -4,6 +4,7 @@ import { S3Lock } from "./S3Lock";
 import { getInputs } from "./inputs";
 import { Timer } from "./timer";
 import * as color from "./color";
+import { Duration } from "./duration";
 
 async function run() {
   try {
@@ -32,6 +33,7 @@ async function run() {
 
       const key = result.blockingKey;
       const keyDetails = await s3Lock.objectKeyDetails(key);
+      const durationTillExpiry = s3Lock.durationTillExpiry(key);
 
       if (timer.expired()) {
         core.error(
@@ -47,9 +49,14 @@ async function run() {
           "already held",
         )} by ${keyDetails}`,
       );
-      core.info(`Waiting ${timeoutPoll}`);
+      
+      // If the lock will expire before our next poll, we should only wait until expiry
+      // This ensures we don't miss the opportunity to acquire the lock if it's released early
+      const waitTimeMs = Math.min(timeoutPoll.milliseconds(), durationTillExpiry.milliseconds());
+      const waitTime = Duration.milliseconds(waitTimeMs);
+      core.info(`Waiting ${waitTimeMs}ms before checking again (lock expires in ${durationTillExpiry.milliseconds()}ms)`);
 
-      await timer.sleep(timeoutPoll);
+      await timer.sleep(waitTime);
     }
   } catch (error) {
     if (error instanceof Error) {
