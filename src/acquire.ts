@@ -4,6 +4,7 @@ import { S3Lock } from "./S3Lock";
 import { getInputs } from "./inputs";
 import { Timer } from "./timer";
 import * as color from "./color";
+import { Duration } from "./duration";
 
 async function run() {
   try {
@@ -48,9 +49,13 @@ async function run() {
           "already held",
         )} by ${keyDetails}`,
       );
-      core.info(`Waiting until lock expires (${waitDuration} from now)`);
+      
+      // Calculate the minimum wait time between the polling interval and the time until expiry
+      const waitTimeMs = Math.min(timeoutPoll.milliseconds(), waitDuration.milliseconds());
+      const waitTime = Duration.milliseconds(waitTimeMs);
+      core.info(`Waiting ${waitTimeMs}ms before checking again (lock expires in ${waitDuration.milliseconds()}ms)`);
 
-      await timer.sleep(waitDuration);
+      await timer.sleep(waitTime);
     }
   } catch (error) {
     if (error instanceof Error) {
