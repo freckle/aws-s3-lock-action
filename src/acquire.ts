@@ -33,7 +33,7 @@ async function run() {
 
       const key = result.blockingKey;
       const keyDetails = await s3Lock.objectKeyDetails(key);
-      const waitDuration = await s3Lock.waitDuration(key);
+      const durationTillExpiry = s3Lock.durationTillExpiry(key);
 
       if (timer.expired()) {
         core.error(
@@ -50,10 +50,11 @@ async function run() {
         )} by ${keyDetails}`,
       );
       
-      // Calculate the minimum wait time between the polling interval and the time until expiry
-      const waitTimeMs = Math.min(timeoutPoll.milliseconds(), waitDuration.milliseconds());
+      // If the lock will expire before our next poll, we should only wait until expiry
+      // This ensures we don't miss the opportunity to acquire the lock if it's released early
+      const waitTimeMs = Math.min(timeoutPoll.milliseconds(), durationTillExpiry.milliseconds());
       const waitTime = Duration.milliseconds(waitTimeMs);
-      core.info(`Waiting ${waitTimeMs}ms before checking again (lock expires in ${waitDuration.milliseconds()}ms)`);
+      core.info(`Waiting ${waitTimeMs}ms before checking again (lock expires in ${durationTillExpiry.milliseconds()}ms)`);
 
       await timer.sleep(waitTime);
     }
