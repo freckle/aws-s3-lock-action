@@ -116,8 +116,7 @@ export class S3Lock {
   }
 
   async waitDuration(key: string): Promise<Duration> {
-    const end = key.slice(this.prefix.length);
-    const { expiresAt } = S3LockExt.fromString(end);
+    const { expiresAt } = S3LockExt.fromKey(this.prefix, key);
     return Duration.until(expiresAt);
   }
 }
