@@ -136,9 +136,9 @@
     tslib "^2.6.2"
 
 "@aws-sdk/client-s3@^3.779.0":
-  version "3.830.0"
-  resolved "https://registry.yarnpkg.com/@aws-sdk/client-s3/-/client-s3-3.830.0.tgz#487c5afbc98912ac6bea1b0c0a2065a426cd3c30"
-  integrity sha512-Cti+zj1lqvQIScXFQv8/t1xo3pvcvk/ObmGIbyLzfgcYpKMHaIWhzhi6aN+z4dYEv1EwrukC9tNoqScyShc5tw==
+  version "3.832.0"
+  resolved "https://registry.yarnpkg.com/@aws-sdk/client-s3/-/client-s3-3.832.0.tgz#c6908ebfcabcfa166fb8bdb2c23e74e4a3df1ea1"
+  integrity sha512-S+md1zCe71SEuaRDuLHq4mzhYYkVxR1ENa8NwrgInfYoC4xo8/pESoR6i0ZZpcLs0Jw4EyVInWYs4GgDHW70qQ==
   dependencies:
     "@aws-crypto/sha1-browser" "5.2.0"
     "@aws-crypto/sha256-browser" "5.2.0"
@@ -195,7 +195,9 @@
     "@smithy/util-stream" "^4.2.2"
     "@smithy/util-utf8" "^4.0.0"
     "@smithy/util-waiter" "^4.0.5"
+    "@types/uuid" "^9.0.1"
     tslib "^2.6.2"
+    uuid "^9.0.1"
 
 "@aws-sdk/client-sso@3.830.0":
   version "3.830.0"
@@ -365,9 +367,9 @@
     tslib "^2.6.2"
 
 "@aws-sdk/lib-storage@^3.777.0":
-  version "3.830.0"
-  resolved "https://registry.yarnpkg.com/@aws-sdk/lib-storage/-/lib-storage-3.830.0.tgz#5180414f18bbb4abe635080891704dbd903d0e98"
-  integrity sha512-jHNM1HhOmwMB5sguttXozL1HiDPf0yovu2o2L3ijMvexSUlrtqE2b2JjevMfVq7xZ5RYhBnQ+T8Q4MUclI8GnQ==
+  version "3.832.0"
+  resolved "https://registry.yarnpkg.com/@aws-sdk/lib-storage/-/lib-storage-3.832.0.tgz#a4de6c710bd970490c929fcc44c9baaeea8cbb2f"
+  integrity sha512-NM+q0WD8TCreo+tvKy0AZytHQQC19zXVG8iapDhafLNs1W72zAQ659pTfVzsC00Zvwtsp0LI/b2FWTjkjTAAdA==
   dependencies:
     "@smithy/abort-controller" "^4.0.4"
     "@smithy/middleware-endpoint" "^4.1.11"
@@ -2111,6 +2113,11 @@
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-10.0.0.tgz#e9c07fe50da0f53dc24970cca94d619ff03f6f6d"
   integrity sha512-7gqG38EyHgyP1S+7+xomFtL+ZNHcKv6DwNaCZmJmo1vgMugyF3TCnXVg4t1uk89mLNwnLtnY3TpOpCOyp1/xHQ==
+
+"@types/uuid@^9.0.1":
+  version "9.0.8"
+  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-9.0.8.tgz#7545ba4fc3c003d6c756f651f3bf163d8f0f29ba"
+  integrity sha512-jg+97EGIcY9AGHJJRaaPVgetKDsrTgbRjQ5Msgjh/DQKEFl0DtyRr/VCOyD1T2R1MNeWPK/u7JoGhlDZnKBAfA==
 
 "@types/yargs-parser@*":
   version "21.0.3"
