@@ -12,6 +12,9 @@ concurrency:
 env:
   S3_BUCKET: aws-s3-lock-ci
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
