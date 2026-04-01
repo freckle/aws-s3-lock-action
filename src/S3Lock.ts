@@ -8,10 +8,10 @@ import {
 } from "@aws-sdk/client-s3";
 import { Upload } from "@aws-sdk/lib-storage";
 
-import { S3LockExt, createObjectKey, validateObjectKey } from "./S3LockExt";
-import { Duration } from "./duration";
-import { mapMaybe } from "./maybe";
-import * as color from "./color";
+import { S3LockExt, createObjectKey, validateObjectKey } from "./S3LockExt.js"
+import { Duration } from "./duration.js"
+import { mapMaybe } from "./maybe.js"
+import * as color from "./color.js"
 
 export type AcquireLockResult =
   | { tag: "acquired"; acquiredKey: string }

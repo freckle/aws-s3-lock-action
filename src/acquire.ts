@@ -1,9 +1,9 @@
 import * as core from "@actions/core";
 
-import { S3Lock } from "./S3Lock";
-import { getInputs } from "./inputs";
-import { Timer } from "./timer";
-import * as color from "./color";
+import { S3Lock } from "./S3Lock.js"
+import { getInputs } from "./inputs.js"
+import { Timer } from "./timer.js"
+import * as color from "./color.js"
 
 async function run() {
   try {
