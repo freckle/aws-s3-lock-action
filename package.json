@@ -5,10 +5,10 @@
   "description": "Action description",
   "main": "lib/main.js",
   "scripts": {
-    "build": "tsc && ncc build lib/acquire.js --out dist/acquire --minify && ncc build lib/release.js --out dist/release --minify",
+    "build": "tsc -p tsconfig.build.json && ncc build lib/acquire.js --out dist/acquire --minify && ncc build lib/release.js --out dist/release --minify",
     "format": "prettier --write \"**/*.ts\"",
     "format-check": "prettier --check \"**/*.ts\"",
-    "test": "NODE_OPTIONS='--experimental-vm-modules' jest",
+    "test": "vitest run",
     "readme": "npx action-docs -u && prettier --write README.md"
   },
   "repository": {
@@ -31,14 +31,13 @@
     "@octokit/plugin-rest-endpoint-methods": "^17.0.0",
     "@octokit/types": "^16.0.0",
     "@types/ansi-styles": "^4.2.4",
-    "@types/jest": "^30.0.0",
     "@types/node": "^24.12.0",
     "@types/uuid": "^11.0.0",
     "@vercel/ncc": "^0.38.4",
     "action-docs": "^2.5.1",
-    "jest": "^30.3.0",
+    "jsdom": "^29.0.1",
     "prettier": "^3.8.1",
-    "ts-jest": "^29.4.9",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.2"
   }
 }
