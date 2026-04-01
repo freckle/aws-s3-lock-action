@@ -1,5 +1,5 @@
-import { Duration } from "./duration";
-import { S3LockExt, createObjectKey, validateObjectKey } from "./S3LockExt";
+import { Duration } from "./duration.js"
+import { S3LockExt, createObjectKey, validateObjectKey } from "./S3LockExt.js"
 
 describe("createObjectKey", () => {
   test("creates key like prefix.created.uuid.expires", () => {

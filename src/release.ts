@@ -1,6 +1,6 @@
 import * as core from "@actions/core";
 
-import { S3Lock } from "./S3Lock";
+import { S3Lock } from "./S3Lock.js"
 
 async function run() {
   try {

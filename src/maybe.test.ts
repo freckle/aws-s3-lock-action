@@ -1,4 +1,4 @@
-import { mapMaybe } from "./maybe";
+import { mapMaybe } from "./maybe.js"
 
 test("mapMaybe", () => {
   const resultA = mapMaybe(["apple", "banana", "boat"], (x) =>

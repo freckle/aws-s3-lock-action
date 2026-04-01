@@ -1,6 +1,6 @@
 import * as core from "@actions/core";
 
-import { Duration } from "./duration";
+import { Duration } from "./duration.js"
 
 export type Inputs = {
   bucket: string;

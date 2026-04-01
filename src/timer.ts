@@ -1,4 +1,4 @@
-import { Duration } from "./duration";
+import { Duration } from "./duration.js"
 
 export class Timer {
   private expiry: Duration;

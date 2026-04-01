@@ -1,13 +1,14 @@
 {
   "name": "action-name",
   "version": "0.0.0",
+  "type": "module",
   "description": "Action description",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc && ncc build lib/acquire.js --out dist/acquire --minify && ncc build lib/release.js --out dist/release --minify",
     "format": "prettier --write \"**/*.ts\"",
     "format-check": "prettier --check \"**/*.ts\"",
-    "test": "jest",
+    "test": "NODE_OPTIONS='--experimental-vm-modules' jest",
     "readme": "npx action-docs -u && prettier --write README.md"
   },
   "repository": {
