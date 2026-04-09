@@ -152,10 +152,10 @@
     "@smithy/util-utf8" "^2.0.0"
     tslib "^2.6.2"
 
-"@aws-sdk/client-s3@^3.1026.0":
-  version "3.1026.0"
-  resolved "https://registry.yarnpkg.com/@aws-sdk/client-s3/-/client-s3-3.1026.0.tgz#93542558bea183aa36892633fafb20414c34b370"
-  integrity sha512-tMP+s641FLSXdJazvYvuf38F7suWWv+wagTvShykPTffuFpBj5J9f7Rw0eKsauBcsjPSntiwBz9Gm0Tlh+cKfQ==
+"@aws-sdk/client-s3@^3.1027.0":
+  version "3.1027.0"
+  resolved "https://registry.yarnpkg.com/@aws-sdk/client-s3/-/client-s3-3.1027.0.tgz#ffffd7ee7a5271a68dd3c768b8cce1498c4e30d5"
+  integrity sha512-g6kaFE/pW0Tsoq/BYg8PfXa1hIZQBmyoKtmJTgcbdyzYWiOOu8vj4PZUE2kS8myita6avaY8Ama5IodHJ39lPA==
   dependencies:
     "@aws-crypto/sha1-browser" "5.2.0"
     "@aws-crypto/sha256-browser" "5.2.0"
@@ -358,10 +358,10 @@
     "@smithy/types" "^4.14.0"
     tslib "^2.6.2"
 
-"@aws-sdk/lib-storage@^3.1026.0":
-  version "3.1026.0"
-  resolved "https://registry.yarnpkg.com/@aws-sdk/lib-storage/-/lib-storage-3.1026.0.tgz#19f71b1938bd33d4beacb8a7e18f4b653993c586"
-  integrity sha512-zxNkf7PyQ7XOJeWYBcHCAQGcNy0knA2wdNQtgZ13TtPtSAaKhpqSz0eIc55j05f91YoFPKXKkuYhqNHUCn8nGg==
+"@aws-sdk/lib-storage@^3.1027.0":
+  version "3.1027.0"
+  resolved "https://registry.yarnpkg.com/@aws-sdk/lib-storage/-/lib-storage-3.1027.0.tgz#9177ab988c3d5ac6a66b885e1f122bd98a0e6531"
+  integrity sha512-gw2ORkS9mLlX4WbL/auOyzvr4vTH7upSQE2kE150KDubO68wXWeUCyNB00vI00+7bU45HMr6IhqbmZDdaq/gIQ==
   dependencies:
     "@smithy/middleware-endpoint" "^4.4.29"
     "@smithy/protocol-http" "^5.3.13"
