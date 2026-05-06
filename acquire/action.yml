@@ -35,5 +35,5 @@ outputs:
   acquired-at:
     description: "Timestamp the lock was acquired"
 runs:
-  using: "node20"
+  using: "node24"
   main: "../dist/acquire/index.js"
