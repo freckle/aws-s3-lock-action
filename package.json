@@ -31,7 +31,7 @@
     "@octokit/plugin-rest-endpoint-methods": "^17.0.0",
     "@octokit/types": "^16.0.0",
     "@types/ansi-styles": "^4.2.4",
-    "@types/node": "^24.13.1",
+    "@types/node": "^24.13.2",
     "@types/uuid": "^11.0.0",
     "@vercel/ncc": "^0.44.0",
     "action-docs": "^2.5.1",
