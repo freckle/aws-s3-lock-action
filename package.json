@@ -33,7 +33,7 @@
     "@types/ansi-styles": "^4.2.4",
     "@types/node": "^24.13.3",
     "@types/uuid": "^11.0.0",
-    "@vercel/ncc": "^0.44.1",
+    "@vercel/ncc": "^0.45.0",
     "action-docs": "^2.5.1",
     "jsdom": "^30.0.1",
     "prettier": "^3.9.6",
