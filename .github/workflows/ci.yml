@@ -20,15 +20,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
       - uses: actions/setup-node@v7
         with:
-          cache: yarn
-          node-version-file: '.nvmrc'
-      - run: yarn install
-      - run: yarn build
-      - run: yarn test --passWithNoTests
+          cache: pnpm
+          node-version-file: ".nvmrc"
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm format-check
+      - run: pnpm typecheck
+      - run: pnpm lint
+      - run: pnpm knip
+      - run: pnpm coverage
+      - run: pnpm build
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dist
+          path: dist
 
   integration:
+    needs: build
     if: ${{ github.actor != 'dependabot[bot]' }}
     runs-on: ubuntu-latest
     permissions:
@@ -36,6 +46,10 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist
+          path: dist # overwrite the committed bundles
       - uses: aws-actions/configure-aws-credentials@v6
         with:
           aws-region: ${{ vars.AWS_REGION }}
@@ -69,6 +83,10 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist
+          path: dist # overwrite the committed bundles
       - uses: aws-actions/configure-aws-credentials@v6
         with:
           aws-region: ${{ vars.AWS_REGION }}
@@ -80,6 +98,7 @@ jobs:
           timeout: 0s
 
   integration-separate:
+    needs: build
     if: ${{ github.actor != 'dependabot[bot]' }}
     runs-on: ubuntu-latest
     permissions:
@@ -87,6 +106,10 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist
+          path: dist # overwrite the committed bundles
       - uses: aws-actions/configure-aws-credentials@v6
         with:
           aws-region: ${{ vars.AWS_REGION }}
