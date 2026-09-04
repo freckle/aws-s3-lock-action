@@ -1,7 +1,7 @@
 import {Duration} from './duration.js'
 import {Timer} from './timer.js'
 
-describe('Timer', () => {
+describe(Timer.name, () => {
   beforeEach(() => {
     vi.useFakeTimers()
   })

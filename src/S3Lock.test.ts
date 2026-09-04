@@ -64,7 +64,7 @@ const keyWith = (created: Date, uuid: string, expiresAt: Date): string => {
   return `${prefix}${ext}`
 }
 
-describe('S3Lock', () => {
+describe(S3Lock.name, () => {
   beforeEach(() => {
     mocks.uploaded.length = 0
     mocks.uploadDone.mockResolvedValue({})

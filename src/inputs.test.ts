@@ -8,7 +8,7 @@ const withInputs = (values: Record<string, string>) => {
   vi.mocked(core.getInput).mockImplementation((name: string) => values[name] ?? '')
 }
 
-describe('getInputs', () => {
+describe(getInputs.name, () => {
   test('reads and parses every input', () => {
     withInputs({
       bucket: 'my-bucket',
