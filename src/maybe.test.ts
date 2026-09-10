@@ -1,13 +1,9 @@
-import { mapMaybe } from "./maybe.js"
+import {mapMaybe} from './maybe.js'
 
-test("mapMaybe", () => {
-  const resultA = mapMaybe(["apple", "banana", "boat"], (x) =>
-    x.startsWith("a") ? x : null,
-  );
-  const resultB = mapMaybe(["apple", "banana", "boat"], (x) =>
-    x.startsWith("b") ? x : null,
-  );
+test('mapMaybe', () => {
+  const resultA = mapMaybe(['apple', 'banana', 'boat'], x => (x.startsWith('a') ? x : null))
+  const resultB = mapMaybe(['apple', 'banana', 'boat'], x => (x.startsWith('b') ? x : null))
 
-  expect(resultA).toEqual(["apple"]);
-  expect(resultB).toEqual(["banana", "boat"]);
-});
+  expect(resultA).toEqual(['apple'])
+  expect(resultB).toEqual(['banana', 'boat'])
+})
