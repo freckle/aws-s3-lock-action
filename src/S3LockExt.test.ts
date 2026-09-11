@@ -1,7 +1,7 @@
 import {Duration} from './duration.js'
 import {S3LockExt, createObjectKey, validateObjectKey} from './S3LockExt.js'
 
-describe('createObjectKey', () => {
+describe(createObjectKey.name, () => {
   test('creates key like prefix.created.uuid.expires', () => {
     const key = createObjectKey('some/prefix.', new Duration('1m'))
 
@@ -9,7 +9,7 @@ describe('createObjectKey', () => {
   })
 })
 
-describe('validateObjectKey', () => {
+describe(validateObjectKey.name, () => {
   test('skips objects without key', () => {
     expect(validateObjectKey('some/prefix.', {})).toBeNull()
   })
@@ -34,7 +34,7 @@ describe('validateObjectKey', () => {
   })
 })
 
-describe('S3LockExt', () => {
+describe(S3LockExt.name, () => {
   test('round trips', () => {
     const exp = new Duration('1m')
     const ext = new S3LockExt(exp)
