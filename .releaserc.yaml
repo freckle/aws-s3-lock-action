@@ -10,10 +10,13 @@ plugins:
 
   # Update dist, in case Dependabot PRs merged without doing so
   - - "@semantic-release/exec"
-    - prepareCmd: "yarn install && yarn run build"
+    - prepareCmd: "pnpm install && pnpm run build"
 
+  # Two bundles: the action's main (acquire) and its post (release)
   - - "@semantic-release/git"
-    - assets: "dist/index.js"
+    - assets:
+        - "dist/acquire/index.js"
+        - "dist/release/index.js"
       message: "chore(release): build dist"
 
 branches:

@@ -14,7 +14,7 @@ async function run() {
     const s3Lock = new S3Lock(bucket, name, expires);
 
     while (true) {
-      let result = await s3Lock.acquireLock(context);
+      const result = await s3Lock.acquireLock(context);
 
       if (result.tag === "acquired") {
         const key = result.acquiredKey;

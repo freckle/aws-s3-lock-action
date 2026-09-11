@@ -59,12 +59,12 @@ export class Duration {
   static week = new Duration(week);
 
   static microseconds(us: number): Duration {
-    let ms = Math.floor(us / 1000);
+    const ms = Math.floor(us / 1000);
     return new Duration(ms);
   }
 
   static nanoseconds = function (ns: number): Duration {
-    let ms = Math.floor(ns / 1000000);
+    const ms = Math.floor(ns / 1000000);
     return new Duration(ms);
   };
 
@@ -125,9 +125,9 @@ export class Duration {
   }
 
   toString(): string {
+    const sign = this._milliseconds < 0 ? "-" : "";
     let str = "",
-      milliseconds = Math.abs(this._milliseconds),
-      sign = this._milliseconds < 0 ? "-" : "";
+      milliseconds = Math.abs(this._milliseconds);
 
     // no units for 0 duration
     if (milliseconds === 0) {
@@ -135,21 +135,21 @@ export class Duration {
     }
 
     // hours
-    let hours = Math.floor(milliseconds / hour);
+    const hours = Math.floor(milliseconds / hour);
     if (hours !== 0) {
       milliseconds -= hour * hours;
       str += hours.toString() + "h";
     }
 
     // minutes
-    let minutes = Math.floor(milliseconds / minute);
+    const minutes = Math.floor(milliseconds / minute);
     if (minutes !== 0) {
       milliseconds -= minute * minutes;
       str += minutes.toString() + "m";
     }
 
     // seconds
-    let seconds = Math.floor(milliseconds / second);
+    const seconds = Math.floor(milliseconds / second);
     if (seconds !== 0) {
       milliseconds -= second * seconds;
       str += seconds.toString() + "s";
@@ -176,19 +176,19 @@ export class Duration {
       return new Duration(0);
     }
 
-    let regex = /([\-\+\d\.]+)([a-zµμ]+)/g,
-      total = 0,
+    const regex = /([-+\d.]+)([a-zµμ]+)/g,
+      sign = duration[0] === "-" ? -1 : 1;
+    let total = 0,
       count = 0,
-      sign = duration[0] === "-" ? -1 : 1,
       value;
 
     while (true) {
-      let match = regex.exec(duration);
+      const match = regex.exec(duration);
       if (!match) {
         break;
       }
 
-      let unit = match[2] as string;
+      const unit = match[2] as string;
       value = Math.abs(parseFloat(match[1]));
       count++;
 
@@ -215,7 +215,7 @@ export class Duration {
   }
 
   truncate(duration: DurationLike): Duration {
-    let ms = Duration.valueOf(duration);
+    const ms = Duration.valueOf(duration);
     return new Duration(ms * Math.round(this._milliseconds / ms));
   }
 
@@ -267,5 +267,3 @@ export class Duration {
     return Duration.valueOf(a) / Duration.valueOf(b);
   }
 }
-
-export default Duration;
