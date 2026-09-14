@@ -14,13 +14,11 @@ export default defineConfig({
       // integration CI jobs exercise them against a real bucket instead
       exclude: ["src/acquire.ts", "src/release.ts"],
       // Remove to stop enforcing coverage (also revert ci.yml's pnpm coverage -> pnpm test)
-      // Set to the coverage the existing two test files already reach, so this
-      // PR adds the gate without lowering it; raised once more tests land
       thresholds: {
-        lines: 35,
-        branches: 36,
-        functions: 48,
-        statements: 35,
+        lines: 70,
+        branches: 70,
+        functions: 70,
+        statements: 70,
       },
     },
   },
