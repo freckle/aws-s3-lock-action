@@ -189,11 +189,11 @@ importers:
         specifier: ^3.0.1
         version: 3.0.1
       '@aws-sdk/client-s3':
-        specifier: ^3.1177.0
-        version: 3.1177.0
+        specifier: ^3.1178.0
+        version: 3.1178.0
       '@aws-sdk/lib-storage':
-        specifier: ^3.1177.0
-        version: 3.1177.0(@aws-sdk/client-s3@3.1177.0)
+        specifier: ^3.1178.0
+        version: 3.1178.0(@aws-sdk/client-s3@3.1178.0)
       ansi-styles:
         specifier: ^7.0.0
         version: 7.0.0
@@ -253,8 +253,8 @@ packages:
     resolution: {integrity: sha512-J2L1/AdkQOyAEt440r+U4vdh3UcyDk+ybwGd0hWLTNCbS+t2TykGcp3/tNK2H8zHjIzsrsF2B/5YiGCt5tl5yA==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-s3@3.1177.0':
-    resolution: {integrity: sha512-Pe36iD8APFyzKtnPR4mxOFjThp+wv0Tg9aNW1jjGCGlmrYv6sz2ZY7ri4laUJZuR8sJC/jHi5atmqHLUIOy27g==}
+  '@aws-sdk/client-s3@3.1178.0':
+    resolution: {integrity: sha512-T71AGkyhQTx8l0Neb79dtM+3HOSIjIwWfPXWoNESeDF7oiJgRV2Hk5CCjDX5fK1LhPjwF3mtr653XDJB9TnHJQ==}
     engines: {node: '>=20.0.0'}
 
   '@aws-sdk/core@3.981.2':
@@ -293,11 +293,11 @@ packages:
     resolution: {integrity: sha512-AKaUwpy1wPN3B/byFWuvL6v+Qk8Gm840InZJw/bA1A+ciCL3zkzBUyEgxdeghJPEe79VKLs6BvbME74MQa3YKg==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/lib-storage@3.1177.0':
-    resolution: {integrity: sha512-J/mYbaCyw0w7ouyEUYThGwFpBzjrfEXHP/yNTiKZsSuPybp+8Huo8drz2CUDLay0GSqbo4n7YBF6TFa0U77FFA==}
+  '@aws-sdk/lib-storage@3.1178.0':
+    resolution: {integrity: sha512-jbhhNLhmSValE3+opmT7zPppsWFRc/16d7p/dquBjmIoppsqP/8m3/TZSw9dR6dNiT2hEAeQZNDnMEdjr8OJ9w==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
-      '@aws-sdk/client-s3': ^3.1177.0
+      '@aws-sdk/client-s3': ^3.1178.0
 
   '@aws-sdk/middleware-sdk-s3@3.972.92':
     resolution: {integrity: sha512-HNN7mJUSPXxXpbyPwp3wx0dtIJSbUF3iHuoHVNHObMCN2/txIpg9JsJ/V2vroPGXSSqNImEaZkDfGJFqffSX6g==}
@@ -1600,7 +1600,7 @@ snapshots:
       '@smithy/types': 4.20.0
       tslib: 2.8.1
 
-  '@aws-sdk/client-s3@3.1177.0':
+  '@aws-sdk/client-s3@3.1178.0':
     dependencies:
       '@aws-sdk/checksums': 3.1002.7
       '@aws-sdk/core': 3.981.2
@@ -1709,9 +1709,9 @@ snapshots:
       '@smithy/types': 4.20.0
       tslib: 2.8.1
 
-  '@aws-sdk/lib-storage@3.1177.0(@aws-sdk/client-s3@3.1177.0)':
+  '@aws-sdk/lib-storage@3.1178.0(@aws-sdk/client-s3@3.1178.0)':
     dependencies:
-      '@aws-sdk/client-s3': 3.1177.0
+      '@aws-sdk/client-s3': 3.1178.0
       '@smithy/core': 3.41.1
       '@smithy/types': 4.20.0
       buffer: 5.6.0
